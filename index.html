@@ -939,7 +939,7 @@
 
                         <p>
 
-                            khanakanyarat@gmail.com
+                            khanakanyarat@email.com
 
                         </p>
 
@@ -1161,6 +1161,19 @@
                 <div class="result-advice" id="cc-advice">
                     ปรับค่าด้านซ้ายเพื่อดูผลลัพธ์การประเมินคาร์บอนฟุตพริ้นท์ของคุณ
                 </div>
+
+                <div class="tool-actions">
+                    <button type="button" class="tool-btn-outline" id="cc-reset-btn">
+                        <i class="fa-solid fa-rotate-left"></i> รีเซ็ตข้อมูล
+                    </button>
+                    <button type="button" class="tool-btn-outline" id="cc-download-btn">
+                        <i class="fa-solid fa-download"></i> ดาวน์โหลดผล
+                    </button>
+                    <button type="button" class="tool-btn-outline" id="cc-share-btn">
+                        <i class="fa-solid fa-share-nodes"></i> แชร์ผล
+                    </button>
+                </div>
+                <p id="cc-action-msg" class="tool-action-msg"></p>
             </div>
         </div>
 
@@ -1196,8 +1209,16 @@
                 <div class="tool-field">
                     <label>ความเข้มข้น PM2.5 (µg/m³) <strong id="pm25-val">35</strong></label>
                     <input type="range" id="pm-input" min="0" max="300" value="35" class="sim-slider">
-                    <small>ดูค่าจริงได้จากแอปตรวจสภาพอากาศ เช่น Air4Thai หรือ IQAir แล้วนำมากรอกที่นี่</small>
+                    <small>ดูค่าจริงได้จากแอปตรวจสภาพอากาศ เช่น
+                        <a href="https://www.air4thai.com" target="_blank" rel="noopener">Air4Thai</a> หรือ
+                        <a href="https://www.iqair.com/th" target="_blank" rel="noopener">IQAir</a> แล้วนำมากรอกที่นี่
+                    </small>
                 </div>
+
+                <button type="button" class="tool-btn" id="pm-fetch-btn">
+                    <i class="fa-solid fa-location-crosshairs"></i> ดึงค่าจริงจากตำแหน่งปัจจุบัน
+                </button>
+                <p id="pm-fetch-msg" class="tool-action-msg"></p>
             </div>
 
             <div class="result-card">
@@ -1247,21 +1268,42 @@
         <div class="tool-grid">
             <div class="tool-panel">
                 <h3><i class="fas fa-magnifying-glass"></i> เช็คว่าขยะชิ้นนี้ทิ้งถังไหน</h3>
+
+                <!-- ถังขยะ 4 สีตามมาตรฐาน -->
+                <div class="bin-legend" id="bin-legend">
+                    <div class="bin-legend-item" data-bin="bin-wet">
+                        <span class="bin-swatch bin-swatch-wet"><i class="fa-solid fa-trash-can"></i></span>
+                        <small>เขียว<br>ขยะเปียก</small>
+                    </div>
+                    <div class="bin-legend-item" data-bin="bin-recycle">
+                        <span class="bin-swatch bin-swatch-recycle"><i class="fa-solid fa-trash-can"></i></span>
+                        <small>เหลือง<br>รีไซเคิล</small>
+                    </div>
+                    <div class="bin-legend-item" data-bin="bin-general">
+                        <span class="bin-swatch bin-swatch-general"><i class="fa-solid fa-trash-can"></i></span>
+                        <small>น้ำเงิน<br>ทั่วไป</small>
+                    </div>
+                    <div class="bin-legend-item" data-bin="bin-hazard">
+                        <span class="bin-swatch bin-swatch-hazard"><i class="fa-solid fa-trash-can"></i></span>
+                        <small>แดง<br>อันตราย</small>
+                    </div>
+                </div>
+
                 <div class="tool-field">
                     <label>เลือกประเภทขยะ</label>
                     <select id="sw-item">
                         <option value="">-- เลือกขยะ --</option>
-                        <option value="plastic_bottle">ขวดน้ำพลาสติก (PET)</option>
-                        <option value="food_waste">เศษอาหาร</option>
-                        <option value="paper">กระดาษ/กล่องกระดาษ</option>
-                        <option value="battery">ถ่านไฟฉาย/แบตเตอรี่</option>
-                        <option value="plastic_bag">ถุงพลาสติกเปื้อน</option>
-                        <option value="can">กระป๋องอลูมิเนียม</option>
-                        <option value="lightbulb">หลอดไฟ/หลอดฟลูออเรสเซนต์</option>
-                        <option value="glass">ขวดแก้ว/เศษแก้ว</option>
-                        <option value="foam">กล่องโฟม</option>
-                        <option value="clothes">เสื้อผ้าเก่า</option>
-                        <option value="electronics">ขยะอิเล็กทรอนิกส์ (สายชาร์จ/มือถือเก่า)</option>
+                        <option value="plastic_bottle">🥤 ขวดน้ำพลาสติก (PET)</option>
+                        <option value="food_waste">🍃 เศษอาหาร</option>
+                        <option value="paper">📄 กระดาษ/กล่องกระดาษ</option>
+                        <option value="battery">🔋 ถ่านไฟฉาย/แบตเตอรี่</option>
+                        <option value="plastic_bag">🛍️ ถุงพลาสติกเปื้อน</option>
+                        <option value="can">🥫 กระป๋องอลูมิเนียม</option>
+                        <option value="lightbulb">💡 หลอดไฟ/หลอดฟลูออเรสเซนต์</option>
+                        <option value="glass">🍾 ขวดแก้ว/เศษแก้ว</option>
+                        <option value="foam">📦 กล่องโฟม</option>
+                        <option value="clothes">👕 เสื้อผ้าเก่า</option>
+                        <option value="electronics">📱 ขยะอิเล็กทรอนิกส์ (สายชาร์จ/มือถือเก่า)</option>
                     </select>
                 </div>
                 <button class="tool-btn" id="sw-check-btn">เช็คถังขยะ</button>
@@ -1410,6 +1452,11 @@
             <div class="result-row"><span>ออกซิเจนละลายน้ำ</span><span id="wq-b-do">-</span></div>
             <div class="result-row"><span>ความขุ่น</span><span id="wq-b-turb">-</span></div>
           </div>
+
+          <div class="wq-chart-wrap">
+            <canvas id="wq-score-chart" height="180"></canvas>
+          </div>
+
           <div class="result-advice" id="wq-advice">ปรับค่าด้านซ้ายเพื่อประเมินคุณภาพน้ำ</div>
         </div>
 
@@ -1734,7 +1781,8 @@
 
                 </div>
 
-                
+            </div>
+
             <!-- Footer Bottom -->
 
             <div class="footer-bottom">
@@ -1867,6 +1915,90 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     calculate();
+
+    // ---------------- ปุ่ม รีเซ็ต / ดาวน์โหลด / แชร์ ----------------
+    const DEFAULTS = { elec: 300, gas: 15, car: 400, moto: 100, transit: 50, meat: 10 };
+    const resetBtn = document.getElementById("cc-reset-btn");
+    const downloadBtn = document.getElementById("cc-download-btn");
+    const shareBtn = document.getElementById("cc-share-btn");
+    const actionMsg = document.getElementById("cc-action-msg");
+
+    function showActionMsg(text, isError) {
+        if (!actionMsg) return;
+        actionMsg.innerText = text;
+        actionMsg.style.color = isError ? "#dc2626" : "#059669";
+        actionMsg.classList.add("show");
+        clearTimeout(showActionMsg._t);
+        showActionMsg._t = setTimeout(function () {
+            actionMsg.classList.remove("show");
+        }, 3000);
+    }
+
+    if (resetBtn) {
+        resetBtn.addEventListener("click", function () {
+            ids.forEach(function (id) {
+                if (sliders[id]) sliders[id].value = DEFAULTS[id];
+            });
+            calculate();
+            showActionMsg("รีเซ็ตข้อมูลเรียบร้อยแล้ว");
+        });
+    }
+
+    function buildResultText() {
+        const lines = [
+            "=== ผลการคำนวณ Carbon Footprint — EcoVision ===",
+            "",
+            "ไฟฟ้า: " + breakdownEls.elec.innerText,
+            "แก๊สหุงต้ม: " + breakdownEls.gas.innerText,
+            "รถยนต์ส่วนตัว: " + breakdownEls.car.innerText,
+            "มอเตอร์ไซค์: " + breakdownEls.moto.innerText,
+            "ขนส่งสาธารณะ: " + breakdownEls.transit.innerText,
+            "อาหาร (เนื้อสัตว์): " + breakdownEls.meat.innerText,
+            "",
+            "รวมทั้งหมด: " + totalVal.innerText,
+            "ต้นไม้ที่ต้องปลูกชดเชย/ปี: " + treesEl.innerText,
+            "",
+            adviceBox.innerText,
+            "",
+            "สร้างจาก ecovision (" + new Date().toLocaleDateString("th-TH") + ")"
+        ];
+        return lines.join("\n");
+    }
+
+    if (downloadBtn) {
+        downloadBtn.addEventListener("click", function () {
+            const blob = new Blob([buildResultText()], { type: "text/plain;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "carbon-footprint-result.txt";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showActionMsg("ดาวน์โหลดผลลัพธ์เรียบร้อยแล้ว");
+        });
+    }
+
+    if (shareBtn) {
+        shareBtn.addEventListener("click", function () {
+            const shareText = "คาร์บอนฟุตพริ้นท์ของฉันอยู่ที่ " + totalVal.innerText +
+                " ต่อเดือน ลองคำนวณของคุณได้ที่ EcoVision";
+            if (navigator.share) {
+                navigator.share({
+                    title: "ผล Carbon Footprint ของฉัน — EcoVision",
+                    text: shareText,
+                    url: window.location.href
+                }).catch(function () { /* ผู้ใช้กดยกเลิก ไม่ต้องแจ้งเตือน */ });
+            } else if (navigator.clipboard) {
+                navigator.clipboard.writeText(shareText + " " + window.location.href)
+                    .then(function () { showActionMsg("คัดลอกผลลัพธ์ไปยังคลิปบอร์ดแล้ว"); })
+                    .catch(function () { showActionMsg("ไม่สามารถคัดลอกได้ ลองอีกครั้ง", true); });
+            } else {
+                showActionMsg("เบราว์เซอร์นี้ไม่รองรับการแชร์อัตโนมัติ", true);
+            }
+        });
+    }
 });
 
 
@@ -1912,6 +2044,63 @@ document.addEventListener("DOMContentLoaded", function () {
 
     slider.addEventListener("input", update);
     update();
+
+    // ---------------- ดึงค่า PM2.5 จริงจากตำแหน่งปัจจุบัน (Open-Meteo Air Quality API) ----------------
+    const fetchBtn = document.getElementById("pm-fetch-btn");
+    const fetchMsg = document.getElementById("pm-fetch-msg");
+
+    function showFetchMsg(text, isError) {
+        if (!fetchMsg) return;
+        fetchMsg.innerText = text;
+        fetchMsg.style.color = isError ? "#dc2626" : "#059669";
+        fetchMsg.classList.add("show");
+        clearTimeout(showFetchMsg._t);
+        showFetchMsg._t = setTimeout(function () { fetchMsg.classList.remove("show"); }, 4000);
+    }
+
+    if (fetchBtn) {
+        fetchBtn.addEventListener("click", function () {
+            if (!navigator.geolocation) {
+                showFetchMsg("เบราว์เซอร์นี้ไม่รองรับการระบุตำแหน่ง", true);
+                return;
+            }
+
+            fetchBtn.disabled = true;
+            const originalLabel = fetchBtn.innerHTML;
+            fetchBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังดึงตำแหน่ง...';
+
+            navigator.geolocation.getCurrentPosition(function (pos) {
+                const lat = pos.coords.latitude;
+                const lon = pos.coords.longitude;
+                fetchBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังดึงค่าฝุ่น...';
+
+                fetch("https://air-quality-api.open-meteo.com/v1/air-quality?latitude=" + lat +
+                      "&longitude=" + lon + "&current=pm2_5")
+                    .then(function (res) {
+                        if (!res.ok) throw new Error("network");
+                        return res.json();
+                    })
+                    .then(function (data) {
+                        const pmValue = data && data.current ? Math.round(data.current.pm2_5) : null;
+                        if (pmValue === null || isNaN(pmValue)) throw new Error("no-data");
+                        slider.value = Math.min(pmValue, 300);
+                        update();
+                        showFetchMsg("ดึงค่า PM2.5 จริงสำเร็จ: " + pmValue + " µg/m³ (ข้อมูลจาก Open-Meteo)");
+                    })
+                    .catch(function () {
+                        showFetchMsg("ไม่สามารถดึงข้อมูลได้ในขณะนี้ กรุณาลองใหม่ หรือกรอกค่าด้วยตนเอง", true);
+                    })
+                    .finally(function () {
+                        fetchBtn.disabled = false;
+                        fetchBtn.innerHTML = originalLabel;
+                    });
+            }, function () {
+                showFetchMsg("ไม่ได้รับอนุญาตให้เข้าถึงตำแหน่ง กรุณาอนุญาตแล้วลองใหม่", true);
+                fetchBtn.disabled = false;
+                fetchBtn.innerHTML = originalLabel;
+            });
+        });
+    }
 });
 
 
@@ -1937,9 +2126,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const btn = document.getElementById("sw-check-btn");
     const resultBox = document.getElementById("sw-result");
 
+    const legendItems = document.querySelectorAll("#bin-legend .bin-legend-item");
+
     if (btn) {
         btn.addEventListener("click", function () {
             const key = select.value;
+            legendItems.forEach(function (el) { el.classList.remove("active"); });
+
             if (!key) {
                 resultBox.innerHTML = '<p style="color:#ef4444;">กรุณาเลือกประเภทขยะก่อนครับ</p>';
                 return;
@@ -1950,6 +2143,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 '<i class="fa-solid ' + info.icon + '"></i> ทิ้งถัง: ' + info.bin +
                 '</div>' +
                 '<div class="result-advice">' + info.tip + '</div>';
+
+            const activeLegend = document.querySelector('#bin-legend [data-bin="' + info.cls + '"]');
+            if (activeLegend) activeLegend.classList.add("active");
         });
     }
 
@@ -2087,6 +2283,49 @@ function wqUpdate() {
         adviceEl.textContent = 'คุณภาพน้ำน่าเป็นห่วง ไม่เหมาะสำหรับอุปโภคบริโภคโดยตรง ควรบำบัดก่อน';
         adviceEl.style.cssText = 'background:#fef2f2;border:1px solid #fecaca;color:#991b1b;';
     }
+
+    renderWqChart(phScore, doScore, turbScore);
+}
+
+let wqScoreChart = null;
+function renderWqChart(phScore, doScore, turbScore) {
+    const canvas = document.getElementById('wq-score-chart');
+    if (!canvas || !window.Chart) return;
+
+    const scoreColor = function (s) {
+        if (s >= 80) return '#10b981';
+        if (s >= 50) return '#f59e0b';
+        return '#ef4444';
+    };
+    const data = [phScore, doScore, turbScore];
+    const colors = data.map(scoreColor);
+
+    if (wqScoreChart) {
+        wqScoreChart.data.datasets[0].data = data;
+        wqScoreChart.data.datasets[0].backgroundColor = colors;
+        wqScoreChart.update();
+        return;
+    }
+
+    wqScoreChart = new Chart(canvas, {
+        type: 'bar',
+        data: {
+            labels: ['pH', 'ออกซิเจน (DO)', 'ความขุ่น'],
+            datasets: [{
+                label: 'คะแนน (เต็ม 100)',
+                data: data,
+                backgroundColor: colors,
+                borderRadius: 8,
+                maxBarThickness: 48
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true, max: 100 } }
+        }
+    });
 }
 
 document.addEventListener('DOMContentLoaded', wqUpdate);
