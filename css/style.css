@@ -2344,6 +2344,65 @@ ul{
     line-height: 1.7;
 }
 
+/* ---- Tool action buttons: reset / download / share ---- */
+.tool-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.tool-btn-outline {
+    flex: 1 1 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border: 1.5px solid var(--primary);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--primary);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.25s;
+    white-space: nowrap;
+}
+
+.tool-btn-outline:hover {
+    background: var(--primary);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.tool-action-msg {
+    min-height: 18px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tool-action-msg.show {
+    opacity: 1;
+}
+
+@media (max-width: 480px) {
+    .tool-actions { flex-direction: column; }
+}
+
+/* ---- Water Quality: comparison chart ---- */
+.wq-chart-wrap {
+    margin-bottom: 20px;
+    padding: 16px;
+    background: #f8fafc;
+    border-radius: 14px;
+}
+
 .waste-bin-badge {
     display: inline-flex;
     align-items: center;
@@ -2355,13 +2414,68 @@ ul{
     margin-bottom: 16px;
 }
 
-.bin-recycle { background: #dbeafe; color: #1d4ed8; }
-.bin-general { background: #f1f5f9; color: #475569; }
+.bin-recycle { background: #fef9c3; color: #a16207; }
+.bin-general { background: #dbeafe; color: #1d4ed8; }
 .bin-wet     { background: #dcfce7; color: #166534; }
 .bin-hazard  { background: #fee2e2; color: #b91c1c; }
 
+/* ---- Smart Waste: bin color legend ---- */
+.bin-legend {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.bin-legend-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 6px;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    text-align: center;
+    transition: 0.25s;
+}
+
+.bin-legend-item small {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.bin-legend-item.active {
+    border-color: var(--secondary);
+    background: #f0fdf4;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(16, 185, 129, 0.18);
+}
+
+.bin-swatch {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.bin-swatch-wet     { background: #22c55e; }
+.bin-swatch-recycle { background: #eab308; }
+.bin-swatch-general { background: #3b82f6; }
+.bin-swatch-hazard  { background: #ef4444; }
+
 @media (max-width: 992px) {
     .tool-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+    .bin-legend { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ==========================================================
@@ -2484,8 +2598,8 @@ ul{
 
 /* Preset buttons */
 .wq-preset-btn {
-    font-size: 12px;
-    padding: 5px 14px;
+    font-size: 14px;
+    padding: 7px 16px;
     border: 1px solid #d1d5db;
     border-radius: 999px;
     background: #f8fafc;
