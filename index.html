@@ -51,6 +51,15 @@
     <link rel="stylesheet"
           href="css/style.css">
 
+    <!-- ==========================================
+                    PRELOAD ภาพพื้นหลัง HERO
+         โหลดรูปพื้นหลังล่วงหน้าด้วย priority สูง เพื่อให้ขึ้นเร็วและลื่นไหลขึ้น
+    =========================================== -->
+    <link rel="preload" as="image" href="images/hero-bg-mobile.jpg"
+          media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" as="image" href="images/hero-bg.jpg"
+          media="(min-width: 769px)" fetchpriority="high">
+
    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
     <!-- Firebase SDK (แบบ compat ใช้กับ <script> tag ธรรมดา ไม่ต้องใช้ npm) -->
     <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
