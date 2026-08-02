@@ -6,9 +6,10 @@
 
 /* ===========================
         GOOGLE FONT
+        (โหลดผ่าน <link rel="preconnect"> + <link rel="stylesheet"> ใน index.html แล้ว
+         จึงไม่ใช้ @import ซ้ำที่นี่ เพราะ @import จะบล็อกการ render ของหน้าเว็บ
+         และทำให้โหลดฟอนต์เดียวกันซ้ำสองครั้งโดยไม่จำเป็น)
 =========================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap');
 
 /* ===========================
         RESET
@@ -366,8 +367,18 @@ ul{
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.65)), 
                 url('../images/hero-bg.jpg') no-repeat center center;
     background-size: cover;
-    background-attachment: fixed; /* ทำให้รูปขยับแบบมีมิติ (Parallax Effect) เวลาเลื่อนหน้าจอ */
+    /* หมายเหตุ: เอา background-attachment: fixed ออก เพราะเป็นสาเหตุหลักที่ทำให้หน้าเว็บกระตุก/ค้าง
+       เบราว์เซอร์ต้องวาดพื้นหลังใหม่ทุกเฟรมตอนเลื่อนหน้าจอ (repaint on every scroll frame)
+       และบน iOS Safari ก็ไม่รองรับอยู่แล้ว จึงตัดออกเพื่อความลื่นไหลของเว็บ */
     color: #ffffff;
+}
+
+/* บนมือถือ/แท็บเล็ต ใช้รูปพื้นหลังขนาดเล็กกว่า เพื่อลดขนาดไฟล์ที่ต้องโหลดและถอดรหัส */
+@media (max-width: 768px) {
+    .hero {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.65)),
+                           url('../images/hero-bg-mobile.jpg');
+    }
 }
 
 /* ปรับแต่ง Container ข้างในให้จำกัดความกว้าง เพื่อไม่ให้ข้อความยาวแผ่ออกไปกว้างเกินไป */
